@@ -3,7 +3,9 @@
 <template>
     <header>Welcome to Pulse</header>
 
-    <RouterView />
+    <main>
+        <RouterView />
+    </main>
 </template>
 
 <style scoped></style>

@@ -32,7 +32,9 @@ export default defineComponent({
         <h1>Projects</h1>
         <RouterLink to="/">Home</RouterLink>
         <ul>
-            <li v-for="project in projects" :key="project.id">{{ project.name }}</li>
+            <li v-for="project in projects" :key="project.id">
+                <RouterLink :to="`/projects/${project.id}`">{{ project.name }}</RouterLink>
+            </li>
         </ul>
     </div>
 </template>

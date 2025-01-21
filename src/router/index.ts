@@ -1,3 +1,5 @@
+import Home from '@/views/Home.vue'
+import { h } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -6,12 +8,23 @@ const router = createRouter({
         {
             path: '/',
             name: 'Home',
-            component: () => import('../views/Home.vue'),
+            component: () => Home,
         },
         {
             path: '/projects',
             name: 'Projects',
-            component: () => import('../views/Projects.vue'),
+            component: () => import('@/views/Projects.vue'), // Lazy loading [dynamic import]
+        },
+        {
+            path: '/projects/:id', // Dynamic route
+            name: 'SingleProject',
+            component: () => import('@/views/SingleProject.vue'),
+        },
+        {
+            //cath all undefined routes
+            path: '/:pathMatch(.*)*', // '/:catchAll(.*)*'
+            name: 'NotFound',
+            component: h('div', { style: 'color: red;' }, '404! Page not found'),
         },
     ],
 })

@@ -6,8 +6,6 @@ import { RouterLink } from 'vue-router'
     <div class="home">
         <h1>Welcome to Home View page</h1>
         <RouterLink :to="{ name: '/projects/' }">Projects</RouterLink>
-        <br />
-        <RouterLink :to="{ name: '/projects/[id]', params: { id: 1 } }">Project 1</RouterLink>
     </div>
 </template>
 

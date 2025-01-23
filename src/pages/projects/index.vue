@@ -1,30 +1,21 @@
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { supabase } from '@/lib/supabaseClient'
+import { ref } from 'vue'
+import type { Tables } from '../../../database/types'
 
-interface Project {
-    id: number
-    name: string
-}
+const projects = ref<Tables<'projects'>[] | null>([])
 
-export default defineComponent({
-    name: 'Projects',
-    setup() {
-        const projects = ref<Project[]>([])
+//IIFE: Immediately Invoked Function Expression
+;(async () => {
+    const { data, error } = await supabase.from('projects').select('*')
 
-        onMounted(() => {
-            // Simulate fetching data from an API
-            projects.value = [
-                { id: 1, name: 'Project One' },
-                { id: 2, name: 'Project Two' },
-                { id: 3, name: 'Project Three' },
-            ]
-        })
+    if (error) {
+        console.error('Error fetching projects:', error.message)
+        return
+    }
 
-        return {
-            projects,
-        }
-    },
-})
+    projects.value = data
+})()
 </script>
 
 <template>

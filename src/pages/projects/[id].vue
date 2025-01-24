@@ -1,12 +1,8 @@
-<script setup lang="ts">
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <div>
-        <h1>Sample Project {{ route.params?.id }}</h1>
+        <h1>Sample Project</h1>
         <p>This is a sample project description.</p>
     </div>
 </template>

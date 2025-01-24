@@ -30,22 +30,4 @@ const projects = ref<Tables<'projects'>[] | null>([])
     </div>
 </template>
 
-<style scoped>
-.projects {
-    padding: 20px;
-}
-
-.projects h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.projects ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.projects li {
-    margin: 5px 0;
-}
-</style>
+<style scoped></style>

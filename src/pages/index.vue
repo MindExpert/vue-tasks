@@ -5,7 +5,8 @@ import { RouterLink } from 'vue-router'
 <template>
     <div class="home">
         <h1>Welcome to Home View page</h1>
-        <RouterLink :to="{ name: '/projects/' }">Projects</RouterLink>
+        <RouterLink :to="{ name: '/projects/' }">Projects</RouterLink> &nbsp;
+        <RouterLink :to="{ name: '/tasks/' }">Tasks</RouterLink>
     </div>
 </template>
 

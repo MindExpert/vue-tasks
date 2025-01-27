@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Input from '@/components/ui/input/Input.vue'
-import Button from '@/components/ui/button/Button.vue'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,11 +13,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 <template>
     <nav class="h-16 border-b bg-muted/40 flex items-center justify-between px-6">
-        <form class="w-full max-w-96">
+        <form class="relative w-full h-fit max-w-96">
+            <iconify-icon
+                class="absolute top-[50%] translate-y-[-50%] left-2 text-muted-foreground"
+                icon="lucide:search"
+            ></iconify-icon>
             <Input
                 type="search"
                 placeholder="Search projects"
-                class="w-full pl-4 bg-background h-8 rounded-lg border-primary/60 focus:outline-none"
+                class="w-full pl-8 bg-background h-8 rounded-lg border-primary/60 focus:outline-none"
             />
         </form>
 

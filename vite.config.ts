@@ -1,5 +1,8 @@
 import { fileURLToPath, URL } from 'node:url'
 import VueRouter from 'unplugin-vue-router/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
+import Components from 'unplugin-vue-components/vite'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -21,11 +24,27 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: (tag) => tag === 'iconify-icon',
-                    // isCustomElement: (element) => element.startsWith('iconify-icon'),
+                    isCustomElement: (tag) => tag === 'iconify-icon', // isCustomElement: (element) => element.startsWith('iconify-icon'),
                 },
             },
         }),
+        AutoImport({
+            // auto import api
+            include: [
+                /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                /\.vue$/,
+                /\.vue\?vue/, // .vue
+                /\.md$/, // .md
+            ],
+            imports: [
+                'vue',
+                VueRouterAutoImports,
+                // 'vue-router',
+            ],
+            dts: './auto-imports.d.ts',
+            viteOptimizeDeps: true,
+        }),
+        Components({}), // auto import components from /src/components
     ],
     resolve: {
         alias: {

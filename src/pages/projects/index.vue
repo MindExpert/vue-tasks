@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { supabase } from '@/lib/supabaseClient'
-import { ref } from 'vue'
+import { h, ref } from 'vue'
 import type { Tables } from '../../../database/types'
+import type { ColumnDef } from '@tanstack/vue-table'
+import DataTable from '@/components/ui/data-table/DataTable.vue'
 
 const projects = ref<Tables<'projects'>[] | null>([])
 
@@ -16,18 +18,44 @@ const projects = ref<Tables<'projects'>[] | null>([])
 
     projects.value = data
 })()
+
+const columns: ColumnDef<Tables<'projects'>>[] = [
+    {
+        accessorKey: 'name',
+        header: () => h('div', { class: 'text-left' }, 'Name'),
+        cell: ({ row }) => {
+            return h('div', { class: 'text-left font-medium' }, row.getValue('name'))
+        },
+    },
+    {
+        accessorKey: 'status',
+        header: () => h('div', { class: 'text-left' }, 'Status'),
+        cell: ({ row }) => {
+            return h('div', { class: 'text-left font-medium' }, row.getValue('status'))
+        },
+    },
+    {
+        accessorKey: 'created_at',
+        header: () => h('div', { class: 'text-left' }, 'Created At'),
+        cell: ({ row }) => {
+            const date = new Date(row.getValue('created_at'))
+            return h('div', { class: 'text-left font-medium' }, date.toLocaleDateString())
+        },
+    },
+    {
+        accessorKey: 'collaborators',
+        header: () => h('div', { class: 'text-right' }, 'Collaborators'),
+        cell: ({ row }) => {
+            return h(
+                'div',
+                { class: 'text-right font-medium' },
+                JSON.stringify(row.getValue('collaborators')),
+            )
+        },
+    },
+]
 </script>
 
 <template>
-    <div class="projects">
-        <h1>Projects</h1>
-        <RouterLink to="/">Home</RouterLink>
-        <ul>
-            <li v-for="project in projects" :key="project.id">
-                <RouterLink :to="`/projects/${project.id}`">{{ project.name }}</RouterLink>
-            </li>
-        </ul>
-    </div>
+    <DataTable v-if="projects" :data="projects" :columns="columns" />
 </template>
-
-<style scoped></style>

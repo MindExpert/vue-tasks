@@ -37,12 +37,16 @@ export default defineConfig({
                 /\.md$/, // .md
             ],
             imports: [
+                // 'vue-router',
                 'vue',
                 VueRouterAutoImports,
-                // 'vue-router',
+                {
+                    pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate'],
+                },
             ],
             dts: './auto-imports.d.ts',
             viteOptimizeDeps: true,
+            dirs: ['src/stores'],
         }),
         Components({}), // auto import components from /src/components
     ],

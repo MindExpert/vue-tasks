@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient'
-import type { Tables } from '../../../database/types'
-import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
+import { projectsQuery } from '@/utils/supaQueries'
+import type { Projects } from '@/utils/supaQueries'
+import type { ColumnDef } from '@tanstack/vue-table'
 
 usePageStore().pageData.title = 'My Projects'
 
-const projects = ref<Tables<'projects'>[] | null>([])
-
-//IIFE: Immediately Invoked Function Expression
+const projects = ref<Projects | null>([])
 const getProjects = async () => {
-    const { data, error } = await supabase.from('projects').select('*')
+    const { data, error } = await projectsQuery
 
     if (error) {
         console.error('Error fetching projects:', error.message)
@@ -22,7 +20,7 @@ const getProjects = async () => {
 
 await getProjects()
 
-const columns: ColumnDef<Tables<'projects'>>[] = [
+const columns: ColumnDef<Projects[0]>[] = [
     {
         accessorKey: 'name',
         header: () => h('div', { class: 'text-left' }, 'Name'),

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useErrorStore } from '@/stores/error'
-
-const { activeError, errorMsg } = useErrorStore()
+const { activeError } = storeToRefs(useErrorStore())
 </script>
 
 <template>
     <AuthLayout>
-        <AppErrorPage v-if="activeError" :message="errorMsg" />
+        <AppErrorPage v-if="activeError" />
 
         <RouterView v-slot="{ Component, route }">
             <Suspense v-if="Component" :timeout="0">

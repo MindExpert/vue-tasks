@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppErrorPage from '@/components/AppError/AppErrorPage.vue'
-import { useErrorStore } from '@/stores/error'
-
-useErrorStore().setError('Some error message')
+useErrorStore().setError({
+    error: 'Oops, Smth went wrong up in here!',
+    customCode: 404,
+})
 </script>
 
 <template>
-    <AppErrorPage />
+    <div></div>
 </template>

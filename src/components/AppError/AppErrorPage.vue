@@ -1,10 +1,31 @@
 <script setup lang="ts">
-const props = defineProps({
-    error: {
-        type: String,
-        require: false,
-        default: 'Page not found',
-    },
+const router = useRouter()
+
+const errorStore = useErrorStore()
+const error = ref(errorStore.activeError)
+
+const message = ref('')
+const customCode = ref(0)
+const details = ref('')
+const code = ref('')
+const hint = ref('')
+const status = ref(0)
+
+if (error.value && !('code' in error.value)) {
+    message.value = error.value.message
+    customCode.value = error.value.customCode ?? 0
+}
+
+if (error.value && 'code' in error.value) {
+    message.value = error.value.message
+    details.value = error.value.details
+    hint.value = error.value.hint
+    code.value = error.value.code
+    status.value = error.value.statusCode ?? 0
+}
+
+router.afterEach(() => {
+    errorStore.activeError = null
 })
 </script>
 
@@ -12,8 +33,11 @@ const props = defineProps({
     <section class="error">
         <div>
             <iconify-icon icon="lucide:triangle-alert" class="error__icon" />
-            <h1 class="error__code">404</h1>
-            <p class="error__msg">{{ props.error }}</p>
+            <h2 class="error__code">{{ customCode || code }}</h2>
+            <h3 class="error__code" v-if="status">Status Code: {{ status }}</h3>
+            <p class="error__msg">{{ message }}</p>
+            <p v-if="hint">{{ hint }}</p>
+            <p v-if="details">{{ details }}</p>
             <div class="error-footer">
                 <p class="error-footer__text">You'll find lots to explore on the home page.</p>
                 <RouterLink to="/">
@@ -33,7 +57,7 @@ const props = defineProps({
 }
 
 .error__code {
-    @apply font-extrabold text-7xl text-secondary;
+    @apply font-extrabold text-5xl text-secondary;
 }
 
 .error__msg {

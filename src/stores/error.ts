@@ -18,13 +18,13 @@ export const useErrorStore = defineStore('error-store', () => {
 
         if (typeof error === 'string' || error instanceof Error) {
             activeError.value = typeof error === 'string' ? Error(error) : error
-            activeError.value.customCode = customCode ?? 500
+            activeError.value.customCode = customCode || 500
 
             return
         }
 
         activeError.value = error
-        activeError.value.statusCode = customCode ?? 500
+        activeError.value.statusCode = customCode || 500
     }
 
     const clearError = () => {

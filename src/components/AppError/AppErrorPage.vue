@@ -24,27 +24,27 @@ if (error.value && 'code' in error.value) {
     status.value = error.value.statusCode ?? 0
 }
 
+// Will return the correct error component based on the environment (Asynchronous Component)
+const ErrorTemplate = import.meta.env.DEV
+    ? defineAsyncComponent(() => import('./AppErrorDev.vue'))
+    : defineAsyncComponent(() => import('./AppErrorProd.vue'))
+
 router.afterEach(() => {
-    errorStore.activeError = null
+    errorStore.clearError()
 })
 </script>
 
 <template>
     <section class="error">
-        <div>
-            <iconify-icon icon="lucide:triangle-alert" class="error__icon" />
-            <h2 class="error__code">{{ customCode || code }}</h2>
-            <h3 class="error__code" v-if="status">Status Code: {{ status }}</h3>
-            <p class="error__msg">{{ message }}</p>
-            <p v-if="hint">{{ hint }}</p>
-            <p v-if="details">{{ details }}</p>
-            <div class="error-footer">
-                <p class="error-footer__text">You'll find lots to explore on the home page.</p>
-                <RouterLink to="/">
-                    <Button class="max-w-36"> Back to homepage </Button>
-                </RouterLink>
-            </div>
-        </div>
+        <ErrorTemplate
+            :message="message"
+            :customCode="customCode"
+            :code="code"
+            :details="details"
+            :hint="hint"
+            :status="status"
+            :isCustomError="errorStore.isCustomError"
+        />
     </section>
 </template>
 <style scoped>
@@ -52,27 +52,27 @@ router.afterEach(() => {
     @apply mx-auto flex justify-center items-center flex-1 p-10 text-center -mt-20 min-h-[90vh];
 }
 
-.error__icon {
+:deep(.error__icon) {
     @apply text-7xl text-destructive;
 }
 
-.error__code {
+:deep(.error__code) {
     @apply font-extrabold text-5xl text-secondary;
 }
 
-.error__msg {
+:deep(.error__msg) {
     @apply text-3xl font-extrabold text-primary;
 }
 
-.error-footer {
+:deep(.error-footer) {
     @apply flex flex-col items-center justify-center gap-5 mt-6 font-light;
 }
 
-.error-footer__text {
+:deep(.error-footer__text) {
     @apply text-lg text-muted-foreground;
 }
 
-p {
+:deep(p) {
     @apply my-2;
 }
 </style>

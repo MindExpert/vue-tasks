@@ -8,7 +8,7 @@ export const usePageStore = defineStore('page-store', () => {
     }
 })
 
-// make sure to pass the right store definition, `useAuth` in this case.
+// make sure to pass the right store definition, `usePageStore` in this case.
 if (import.meta.hot) {
     import.meta.hot.accept(acceptHMRUpdate(usePageStore, import.meta.hot))
 }

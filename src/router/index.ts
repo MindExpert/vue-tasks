@@ -6,4 +6,11 @@ const router = createRouter({
     routes,
 })
 
+router.beforeEach(async () => {
+    // This is a simple example of how to protect a route
+    const { getSession } = useAuthStore()
+
+    await getSession()
+})
+
 export default router

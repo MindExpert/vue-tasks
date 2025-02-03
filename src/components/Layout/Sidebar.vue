@@ -10,8 +10,16 @@ const links = [
 const accountLinks = [
     { title: 'Profile', to: '/profile', icon: 'lucide:user' },
     { title: 'Settings', to: '/settings', icon: 'lucide:settings' },
-    { title: 'Sign out', to: '/signout', icon: 'lucide:log-out' },
+    { title: 'Sign out', icon: 'lucide:log-out' },
 ]
+
+const executeAction = async (linkTitle: string) => {
+    if (linkTitle === 'Sign out') {
+        // Importing the function dynamically to avoid circular dependency and Pinia store importation after the SideBar component
+        const { logout } = await import('@/utils/supaAuth')
+        await logout()
+    }
+}
 </script>
 
 <template>
@@ -34,7 +42,7 @@ const accountLinks = [
             </div>
 
             <div class="border-y text-center bg-background py-3">
-                <SidebarLinks :links="accountLinks" />
+                <SidebarLinks :links="accountLinks" @actionClicked="executeAction" />
             </div>
         </nav>
     </aside>

@@ -13,11 +13,18 @@ const accountLinks = [
     { title: 'Sign out', icon: 'lucide:log-out' },
 ]
 
+const router = useRouter()
+
 const executeAction = async (linkTitle: string) => {
     if (linkTitle === 'Sign out') {
-        // Importing the function dynamically to avoid circular dependency and Pinia store importation after the SideBar component
+        // Importing the function dynamically to avoid circular dependency and Pinia store importation
+        // This becomes a problem when the store is imported after the component
         const { logout } = await import('@/utils/supaAuth')
-        await logout()
+        const isLoggedOut = await logout()
+
+        if (isLoggedOut) {
+            router.push('/login')
+        }
     }
 }
 </script>

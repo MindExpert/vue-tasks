@@ -46,7 +46,7 @@ export default defineConfig({
             ],
             dts: './auto-imports.d.ts',
             viteOptimizeDeps: true,
-            dirs: ['src/stores'],
+            dirs: ['src/stores/**', 'src/composables/**'],
         }),
         Components({}), // auto import components from /src/components
     ],

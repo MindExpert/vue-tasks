@@ -78,6 +78,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const useTasksStore: typeof import('./src/stores/loaders/tasks')['useTasksStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const validateEmail: typeof import('./src/utils/formValidations')['validateEmail']
   const validatePassword: typeof import('./src/utils/formValidations')['validatePassword']

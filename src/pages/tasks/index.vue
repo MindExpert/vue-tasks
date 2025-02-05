@@ -16,6 +16,18 @@ const getTasks = async () => {
 }
 
 await getTasks()
+
+/** NEW WAY WITH CACHE */
+//import { columns } from '@/utils/tableColumns/projectsColumns'
+//import { useTasksStore } from '@/stores/loaders/tasks'
+//
+//usePageStore().pageData.title = 'My Tasks'
+//
+//const tasksLoader = useTasksStore()
+//const { tasks } = storeToRefs(tasksLoader)
+//const { getTasks } = tasksLoader
+//
+//await getTasks()
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 import { useMemoize } from '@vueuse/core'
 import { tasksWithProjectsQuery } from '@/utils/supaQueries'
-import type { TaskWithProjects } from '@/utils/supaQueries'
+import type { TasksWithProjects } from '@/utils/supaQueries'
 
 export const useTasksStore = defineStore('tasks-store', () => {
-    const tasks = ref<TaskWithProjects | null>(null)
+    const tasks = ref<TasksWithProjects | null>(null)
     const loadTasks = useMemoize(async (key: string) => await tasksWithProjectsQuery)
 
     const getTasks = async () => {

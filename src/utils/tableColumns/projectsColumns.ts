@@ -1,8 +1,13 @@
-import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import type { Projects } from '@/utils/supaQueries'
+import type { ColumnDef } from '@tanstack/vue-table'
+import type { Projects } from '../supaQueries'
+import type { Ref } from 'vue'
+import type { GroupedCollabs } from '@/types/GroupedCollabs'
+import Avatar from '@/components/ui/avatar/Avatar.vue'
+import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
+import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
 
-export const columns: ColumnDef<Projects[0]>[] = [
+export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] => [
     {
         accessorKey: 'name',
         header: () => h('div', { class: 'text-left' }, 'Name'),
@@ -25,21 +30,25 @@ export const columns: ColumnDef<Projects[0]>[] = [
         },
     },
     {
-        accessorKey: 'created_at',
-        header: () => h('div', { class: 'text-left' }, 'Created At'),
-        cell: ({ row }) => {
-            const date = new Date(row.getValue('created_at'))
-            return h('div', { class: 'text-left font-medium' }, date.toLocaleDateString())
-        },
-    },
-    {
         accessorKey: 'collaborators',
-        header: () => h('div', { class: 'text-right' }, 'Collaborators'),
+        header: () => h('div', { class: 'text-left' }, 'Collaborators'),
         cell: ({ row }) => {
             return h(
                 'div',
-                { class: 'text-right font-medium' },
-                JSON.stringify(row.getValue('collaborators')),
+                { class: 'text-left font-medium h-20 flex items-center' },
+                collabs.value[row.original.id]
+                    ? collabs.value[row.original.id].map((collab) => {
+                          return h(RouterLink, { to: `/users/${collab.username}` }, () => {
+                              return h(
+                                  Avatar,
+                                  { class: 'hover:scale-110 transition-transform' },
+                                  () => h(AvatarImage, { src: collab.avatar_url || '' }),
+                              )
+                          })
+                      })
+                    : row.original.collaborators.map(() => {
+                          return h(Avatar, { class: 'animate-pulse' }, () => h(AvatarFallback))
+                      }),
             )
         },
     },

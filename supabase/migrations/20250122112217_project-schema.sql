@@ -8,7 +8,7 @@ CREATE TABLE projects (
     name TEXT NOT NULL,
     slug TEXT UNIQUE NOT NULL,
     status current_status DEFAULT 'in-progress' NOT NULL,
-    description TEXT,
+    description TEXT NOT NULL DEFAULT '',
     collaborators TEXT ARRAY DEFAULT ARRAY[]::VARCHAR[] NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

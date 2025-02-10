@@ -26,7 +26,7 @@ export type Task = QueryData<ReturnType<typeof taskQuery>>
 
 // PROFILE
 export const profileQuery = ({ column, value }: { column: string; value: string }) => {
-    return supabase.from('profiles').select().eq(column, value).single()
+    return supabase.from('profiles').select('*').eq(column, value).single()
 }
 
 // GROUPED COLLABS

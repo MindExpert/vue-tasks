@@ -33,3 +33,8 @@ export const profileQuery = ({ column, value }: { column: string; value: string 
 export const groupedProfilesQuery = (userIds: string[]) =>
     supabase.from('profiles').select('username, avatar_url, id, full_name').in('id', userIds)
 export type Collabs = QueryData<ReturnType<typeof groupedProfilesQuery>>
+
+// UPDATE PROJECT
+export const updateProjectQuery = (updatedProject = {}, id: number) => {
+    return supabase.from('projects').update(updatedProject).eq('id', id)
+}

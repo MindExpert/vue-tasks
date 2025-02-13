@@ -66,9 +66,6 @@ const createTask = async (formData: CreateNewTask) => {
         <SheetContent>
             <SheetHeader>
                 <SheetTitle>Create new task?</SheetTitle>
-                <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account!
-                </SheetDescription>
             </SheetHeader>
 
             <FormKit
@@ -124,7 +121,9 @@ const createTask = async (formData: CreateNewTask) => {
             </FormKit>
 
             <SheetFooter>
-                <Button @click="sheetOpen = false">Cancel</Button>
+                <SheetDescription>
+                    This action is to create a new task for log-in user be!
+                </SheetDescription>
             </SheetFooter>
         </SheetContent>
     </Sheet>

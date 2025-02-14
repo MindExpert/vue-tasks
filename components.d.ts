@@ -10,7 +10,6 @@ declare module 'vue' {
     AppErrorDev: typeof import('./src/components/AppError/AppErrorDev.vue')['default']
     AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']
     AppErrorProd: typeof import('./src/components/AppError/AppErrorProd.vue')['default']
-    AppInEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditStatus: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditStatus.vue')['default']
     AppInPlaceEditText: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditText.vue')['default']
     AppInPlaceEditTextarea: typeof import('./src/components/AppInPlaceEdit/AppInPlaceEditTextarea.vue')['default']

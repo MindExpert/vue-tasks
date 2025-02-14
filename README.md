@@ -37,3 +37,8 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### TEESTING CREDENTIALS
+
+Email: johndoe@mail.com
+Pass: password

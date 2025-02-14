@@ -25,6 +25,14 @@ const triggerDelete = async () => {
     deleteLoading.value = false
     router.push({ name: '/tasks/' })
 }
+
+useMeta({
+    title: `Task: ${task.value?.name || ''} | Pulse`,
+    description: {
+        name: 'description',
+        content: task.value?.description || '',
+    },
+})
 </script>
 
 <template>

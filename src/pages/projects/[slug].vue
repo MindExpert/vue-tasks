@@ -23,6 +23,14 @@ const { getProfilesByIds } = useCollabs()
 const collabs = project.value?.collaborators
     ? await getProfilesByIds(project.value?.collaborators)
     : []
+
+useMeta({
+    title: `Project: ${project.value?.name || ''} | Pulse`,
+    description: {
+        name: 'description',
+        content: project.value?.description || '',
+    },
+})
 </script>
 
 <template>

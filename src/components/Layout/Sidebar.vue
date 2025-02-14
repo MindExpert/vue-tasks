@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core'
-import { useMenu } from '@/composables/menu'
 import SidebarLinks from './SidebarLinks.vue'
 import { menuKey } from '@/utils/injectionKeys'
 import type { MenuInjectionOptions } from '@/utils/injectionKeys'
@@ -36,6 +35,7 @@ const executeAction = async (linkTitle: string) => {
 
 defineEmits(['taskClicked'])
 /** Old way of injecting the menu composable */
+//import { useMenu } from '@/composables/menu'
 //const { menuOpen, toggleMenu } = useMenu()
 const { menuOpen, toggleMenu } = inject(menuKey) as MenuInjectionOptions
 
